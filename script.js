@@ -51,10 +51,10 @@ var linkImgV = linkImg.value;
                     <span class="span-description">Descrição: ${descriptionV}</span><br/>
                     <span class="span-description">Quartos: ${romsV}</span><br/>
                     <span class="span-description"> Vagas de Garagem: ${parkingSpacesV}</span><br/>
-                    <span class="span-description"> Área do Terreno: ${terrainAreaV}</span><br/>
-                    <span class="span-description"> Área Construída: ${buildingAreaV}</span><br/>
+                    <span class="span-description"> Área do Terreno: ${terrainAreaV} metros quadrados</span><br/>
+                    <span class="span-description"> Área Construída: ${buildingAreaV} metros quadrados</span><br/>
                     <span class="span-description"> Localidade: ${localizationV}</span><br/>
-                    <span class="span-description"> Preço: R$${priceV}</span><br/>
+                    <span class="span-description"> Preço: R$${priceV}  por mês</span><br/>
                     <img src="${linkImgV}" width="${400}"/>            
                 </div>
             </div>
