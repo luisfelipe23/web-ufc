@@ -5,9 +5,15 @@
         <link rel="stylesheet" href="style.css">
     </head>
 <body>
+    <header>
+        <h2 align="center">Vendas/Alugueis/Financiamento</h2>
+    </header>
 
-<div id="main">   
+<div id="main">
 <div class="form" style="width: 50%; float:left">
+    <div id="exibir" style="width: 50%; float:right">
+        <h3 align="center">Lista de Imovéis</h3></p><br>
+    </div>
     <img src="victor-imoveis.png" width="200" height="200" alt="logo"/>
     <form action="#">
         <p><h3>INSERIR ANÚNCIO</h3></p>
@@ -22,15 +28,14 @@
             <input type="text" name="price" id="price" placeholder="Preço em R$"/><br>
             <input type="text" name="linkImg" id="linkImg" placeholder="Link imagem"/><br><br><br>
         </div>
+        
         <div class="botoes">
             <input type="button" class="btn" id="btn" value="Cadastrar" onclick={cadastrar()}>
             <input type="reset" class="btn2" id="btn2" value="Limpar">
         </div>
     </form>
 </div>
-<div id="exibir" style="width: 50%; float:right">
-    <h3 align="center">Lista de Imovéis</h3></p><br>
-</div>
+
 
 </div>
 
