@@ -6,12 +6,11 @@ input[type = text]{
     margin-top: 12;
 }
 
-body{
+/* body{
     background-color: #2D6ED5;
-}
+} */
 
-
-.form{
+.main{
     margin-left: 300px;
     margin-right: 300px;
     margin-top: 10px;
@@ -19,3 +18,4 @@ body{
     border-radius: 6px;
     border-color: black;
 }
+
