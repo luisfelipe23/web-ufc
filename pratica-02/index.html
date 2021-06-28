@@ -4,6 +4,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Victor Imoveis</title>
         <link rel="stylesheet" href="css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" href="css/mystyles.css"/>
         <script src="js/jquery-3.5.1.slim.min.js"></script>
         <script src="js/popper.min.js"></script>
@@ -11,54 +12,124 @@
     </head>
 
 <body>
-    <header class="header">
-        <img class="logo" src="./img/victor-imoveis.png" alt="logo" width="300" height="200"/>
-    </header>
+    <div id="app">
+      <header class="header">
+          <img class="logo" src="./img/victor-imoveis.png" alt="logo" width="300" height="200"/>
+      </header>
 
-    <div class="container">
-        <form>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Titulo</label>
-              <input type="text" class="form-control" id="exampleInputText">
-            </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1">Descrição</label>
-                <input type="text" class="form-control" id="exampleInputText">
+      <main class="container">
+          <form>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Titulo</label>
+                <input type="text" class="form-control" id="exampleInputText" placeholder="Informe o nome do seu imóvel" v-model="info.titulo">
               </div>
               <div class="form-group">
-                <label for="exampleInputEmail1">Quantidade de Quartos</label>
-                <input type="text" class="form-control" id="exampleInputText">
-              </div>
-              <div class="form-group">
-                <label for="exampleInputEmail1">Vagas de Garagem</label>
-                <input type="text" class="form-control" id="exampleInputText">
-              </div>
-              <div class="form-group">
-                <label for="exampleInputEmail1">Área do Terreno</label>
-                <input type="text" class="form-control" id="exampleInputText">
-              </div>
-              <div class="form-group">
-                <label for="exampleInputEmail1">Área Construída</label>
-                <input type="text" class="form-control" id="exampleInputText">
-              </div>
-              <div class="form-group">
-                <label for="exampleInputEmail1">Localização</label>
-                <input type="text" class="form-control" id="exampleInputText">
-              </div>
-              <div class="form-group">
-                <label for="exampleInputEmail1">Valor em R$</label>
-                <input type="text" class="form-control" id="exampleInputText">
-              </div>
-              <div class="form-group">
-                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                    <option selected>Selecione Uma opção</option>
-                    <option value="1">Imóvel P/ Aluguel</option>
-                    <option value="2">Imóvel P/ Venda</option>
-                  </select>
+                  <label for="exampleInputEmail1">Descrição</label>
+                  <input type="text" class="form-control" id="exampleInputText" placeholder="Faça uma descrição sobre o imóvel" v-model="info.descricao">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Quantidade de Quartos</label>
+                  <input type="text" class="form-control" id="exampleInputText" v-model="info.qtdQuartos" placeholder="Número de quartos presente no imóvel">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Vagas de Garagem</label>
+                  <input type="text" class="form-control" id="exampleInputText" v-model="info.vagasGaragem" placeholder="Quantidade de vagas disponíveis na garagem">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Área do Terreno</label>
+                  <input type="text" class="form-control" id="exampleInputText" v-model="info.areaTerreno" placeholder="Tamanho total do terreno">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Área Construída</label>
+                  <input type="text" class="form-control" id="exampleInputText" v-model="info.areaConstruida" placeholder="Área do terreno que já foi utilizada">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Localização</label>
+                  <input type="text" class="form-control" id="exampleInputText" v-model="info.localizacao" placeholder="Informe o endereço do imóvel">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Valor em R$</label>
+                  <input type="text" class="form-control" id="exampleInputText" v-model="info.valor" placeholder="Valor do aluguel/compra do imóvel">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Imagem</label>
+                  <input type="text" class="form-control" id="exampleInputText" v-model="info.imagem" placeholder="Insira um URL de uma imagem aqui">
+                </div>
+                <div class="form-group">
+                  <select class="form-select form-select-sm" id="tipo-imovel" aria-label=".form-select-sm example">
+                      <option selected>Selecione Uma opção</option>
+                      <option value="1">Imóvel P/ Aluguel</option>
+                      <option value="2">Imóvel P/ Venda</option>
+                    </select>
+                </div>
+                
+              <button type="submit" class="btn btn-primary" v-on:click="salvarImovel(info)">Adicionar</button>
+              <button type="submit" class="btn btn-secondary" v-on:click.prevent="carregarImoveis()">Carregar imóveis</button>
+              
+              <div class="lista-imoveis container imovel-item mt-5" v-for="info in infos">
+                <div class="row col-md-4">
+                  <div class="card" style="width: 18rem;">
+                    <img :src="info.imagem" class="card-img-top">
+                    <div class="card-body">
+                      <h5 class="card-title">{{info.titulo}}</h5>
+                      <p class="card-text"><b>Descrição: </b>{{info.descricao}}<br><b>Quantidade de quartos: </b>{{info.qtdQuartos}}<br><b>Vagas de garagem: </b>{{info.vagasGaragem}}<br><b>Área do terreno: </b>{{info.areaTerreno}}<br><b>Área construída: </b>{{info.areaConstruida}}<br><b>Localização: </b>{{info.localizacao}}<br><b>Valor: </b> {{info.valor}}<br><b>Tipo de imóvel: </b>{{info.tipoImovel}}<br></p>
+                    </div>  
+                  </div>
+                </div>
               </div>
               
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
-    </div>
+            </form>
+      </main>
+    </div>  
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        let app = new Vue ({
+          el: "#app",
+          data: {
+            infos: [],
+            info: {
+              titulo: '',
+              descricao: '',
+              qtdQuartos: '', 
+              vagasGaragem: '',
+              areaTerreno: '',
+              areaConstruida: '',
+              localizacao: '', 
+              imagem: '',
+              valor: '',
+              tipoImovel: ''
+            }
+          }, 
+          methods: {
+            carregarImoveis () {
+              this.infos = JSON.parse(localStorage.getItem('imoveis'));
+            },
+            
+            salvarImovel(info) {
+              let valorSelecionado = document.getElementById("tipo-imovel").value;
+              
+              if (valorSelecionado == 1) {
+                info.tipoImovel = 'Imóvel P/ Aluguel';
+              } else if (valorSelecionado == 2) {
+                info.tipoImovel = 'Imóvel P/ Venda';
+              } else {
+                info.tipoImovel = '';
+              }
+
+              let infoImoveis = localStorage.getItem('imoveis');
+
+              if (infoImoveis) {
+                infoImoveis = JSON.parse(infoImoveis);
+                infoImoveis.push(info);
+              } else {
+                infoImoveis = [info];
+              }
+
+              localStorage.setItem('imoveis', JSON.stringify(infoImoveis));
+            }
+          }
+        })
+    </script>
 </body>
 </html>
